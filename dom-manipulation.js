@@ -5,7 +5,7 @@ function manipulateDOM() {
   const style = document.querySelector("head > style");
 
   const newInnerHTML =
-    ".flotas {width:5px; height:5px; border-radius: 50%; border:1px solid grey;} .nested-div {display:flex;justify-content:space-between; gap:5px; width:100%;}";
+    ".flotas {width:5px; height:5px; border-radius: 50%; border:1px solid grey;} .nested-div {display:flex;justify-content:space-between; flex-wrap:wrap; width:100%;}";
   style.innerHTML += newInnerHTML;
 
   // todas las filas de resultados
