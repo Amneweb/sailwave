@@ -9,3 +9,14 @@ Para usar el script, una vez generado el html desde el sailwave, abajo (antes de
 <script src="./dom-manipulation.js"></script>
 
 ```
+
+Se establecieron colores para 7 flotas (si hubiera más habría que agregar más opciones al array de colores - las opciones deben contener el nombre de un color existente, o el código HEX)
+Los colores en el array se corresponden a los siguientes colores de flota, en el orden en que acá se muestran👇
+
+- AMARILLO
+- AZUL
+- ROJO
+- BLANCO
+- VERDE
+- MARRON
+- VIOLETA
