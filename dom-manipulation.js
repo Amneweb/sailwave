@@ -48,21 +48,28 @@ for (let j = 0; j < rows.length; j++) {
     }
     if (celdas[j][i].innerHTML == "&nbsp;") {
       console.log("celda en posicion ", i, "en fila ", j, " ", celdas[j][i]);
-      celdas[j][i].style.display = "none";
-      querySel[j];
-      /* celdas[j][i].classList.add("esconder"); */
+
+      /* celdas[j][i].parentNode.removeChild(celdas[j][i]); */
+      celdas[j][i].classList.add("esconder");
     } else {
       celdas[j][i].style.backgroundColor = colores[v];
     }
     v++;
   }
 }
+const titlerow = [...document.querySelectorAll(".titlerow > th")];
+const titleRegatas = titlerow.slice(
+  primeraColumna,
+  primeraColumna + totalColumnasResultados
+);
+console.log(titleRegatas);
+
 const encabezadosRegatas = [...cols].slice(
   primeraColumna,
   primeraColumna + totalColumnasResultados
 );
 console.log(encabezadosRegatas);
-/* let v = 0;
+let v = 0;
 encabezadosRegatas.forEach((nodo, key) => {
   if (key % flotas === 0 && key < primeraColumna + totalColumnasResultados) {
     v = 0;
@@ -71,6 +78,16 @@ encabezadosRegatas.forEach((nodo, key) => {
     if (v < flotas - 1) nodo.classList.add("esconder");
   }
   v++;
-}); 
+});
+let w = 0;
+titleRegatas.forEach((nodo, key) => {
+  if (key % flotas === 0 && key < primeraColumna + totalColumnasResultados) {
+    w = 0;
+    nodo.classList.add("esconder");
+  } else {
+    if (w < flotas - 1) nodo.classList.add("esconder");
+  }
+  w++;
+});
 const escondidos = document.querySelectorAll(".esconder");
-escondidos.forEach((elemento) => (elemento.style.display = "none"));*/
+escondidos.forEach((elemento) => (elemento.style.display = "none"));
