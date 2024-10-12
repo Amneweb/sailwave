@@ -1,6 +1,7 @@
 function manipulateDOM() {
   // colores para 7 flotas
   const colores = ["gold", "blue", "red", "white", "green", "brown", "violet"];
+  // el simbolo del color puede ser circulo o diamante. Para que sea circulo, escribir 'circulo'; para que sea diamante se puede escribir cualquier otra cosa.
   const simbolo = "circulo";
   // todas las filas de resultados
   const rows = document.querySelectorAll("tr.summaryrow");
@@ -53,7 +54,7 @@ function manipulateDOM() {
       } else {
         const newDiv = document.createElement("span");
         newDiv.style.color = colores[v];
-        newDiv.style.fontSize = "30px";
+        newDiv.style.fontSize = simbolo === "circulo" ? "30px" : "20px";
         newDiv.innerHTML =
           simbolo === "circulo" ? "&nbsp; &#8226;" : "&nbsp; &#9830;";
         celdas[j][i].appendChild(newDiv);
