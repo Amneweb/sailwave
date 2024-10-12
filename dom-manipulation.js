@@ -54,9 +54,9 @@ function manipulateDOM() {
       } else {
         const newDiv = document.createElement("span");
         newDiv.style.color = colores[v];
-        newDiv.style.fontSize = simbolo === "circulo" ? "30px" : "20px";
+        newDiv.style.fontSize = "15px";
         newDiv.innerHTML =
-          simbolo === "circulo" ? "&nbsp; &#8226;" : "&nbsp; &#9830;";
+          simbolo === "circulo" ? "&nbsp; &#9679;" : "&nbsp; &#9830;";
         celdas[j][i].appendChild(newDiv);
       }
       v++;
