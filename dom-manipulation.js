@@ -1,14 +1,7 @@
 function manipulateDOM() {
   // colores para 7 flotas
-  const colores = [
-    "yellow",
-    "blue",
-    "red",
-    "white",
-    "green",
-    "brown",
-    "violet",
-  ];
+  const colores = ["gold", "blue", "red", "white", "green", "brown", "violet"];
+  const simbolo = "circulo";
   // todas las filas de resultados
   const rows = document.querySelectorAll("tr.summaryrow");
   // agrega un id a cada <tr>
@@ -60,7 +53,9 @@ function manipulateDOM() {
       } else {
         const newDiv = document.createElement("span");
         newDiv.style.color = colores[v];
-        newDiv.innerHTML = "&nbsp; &#9830;";
+        newDiv.style.fontSize = "30px";
+        newDiv.innerHTML =
+          simbolo === "circulo" ? "&nbsp; &#8226;" : "&nbsp; &#9830;";
         celdas[j][i].appendChild(newDiv);
       }
       v++;
