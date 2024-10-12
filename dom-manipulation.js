@@ -1,22 +1,20 @@
 const colores = ["yellow", "blue", "red", "white", "green", "brown", "violet"];
-
+// todas las filas de resultados
 const rows = document.querySelectorAll("tr.summaryrow");
-console.log("cantidad de filas: ", rows.length);
+// agrega un id a cada <tr>
 rows.forEach((value, key) => (value.id = `puesto-${key + 1}`));
 let primeraColumna;
+// todas las columnas
 const columnas = document.querySelector("colgroup").span;
-console.log("columnas: ", columnas);
 const cols = document.querySelectorAll("colgroup > col");
-console.log(cols);
+// busca la posicion de la primer columna con clase 'race' (porque la cantidad de columnas iniciales pueden variar segun lo que quiera el usuario)
 primeraColumna = [...cols].findIndex((col) => col.classList.contains("race"));
-console.log("primera Columna ", primeraColumna);
-
+// el total de columnas con clase 'race' es el total de columnas con resultados
 const totalColumnasResultados = document.querySelectorAll(".race").length;
-
+// fila de encabezados
 const encabezados = document.querySelectorAll("tr.titlerow > th");
-
+// para calcular la cantidad de flotas, se fija en cuantas veces se repite el encabezado de la primer columna con resultados
 const regata = encabezados[primeraColumna].innerText;
-console.log(regata);
 let flotas = 1;
 let i = primeraColumna;
 while (i < columnas && encabezados[i + 1].innerText === regata) {
@@ -25,9 +23,9 @@ while (i < columnas && encabezados[i + 1].innerText === regata) {
   flotas++;
 }
 const regatasCorridas = totalColumnasResultados / flotas;
-console.log("total columnas de resultados ", totalColumnasResultados);
-console.log("regatas corridas ", regatasCorridas);
-console.log("flotas", flotas);
+// iteracion por filas de resultados en la que se busca el contenido de cada celda. Si el contenido es &nbsp, a la celda se le agrega la clase "esconder". Si la celda contiene un resultado, se agrega el diamante, cuyo color dependera de la ubicacion de la celda en el grupo de columnas de resultados de una regata
+// La variable querySel contiene todas las celdas de la fila
+// La variable celdas contienen solo las celdas de resultados
 let celdas = [];
 let querySel = [];
 let j = 0;
@@ -40,15 +38,13 @@ for (let j = 0; j < rows.length; j++) {
     primeraColumna,
     primeraColumna + totalColumnasResultados
   );
-  console.log("celdas en fila ", j, celdas[j]);
+
   let v = 0;
   for (let i = 0; i < totalColumnasResultados; i++) {
     if (i % flotas === 0) {
       v = 0;
     }
     if (celdas[j][i].innerHTML == "&nbsp;") {
-      console.log("celda en posicion ", i, "en fila ", j, " ", celdas[j][i]);
-
       celdas[j][i].classList.add("esconder");
     } else {
       const newDiv = document.createElement("span");
@@ -59,18 +55,19 @@ for (let j = 0; j < rows.length; j++) {
     v++;
   }
 }
+// fila completa de encabezados
 const titlerow = [...document.querySelectorAll(".titlerow > th")];
+// encabezados de regatas
 const titleRegatas = titlerow.slice(
   primeraColumna,
   primeraColumna + totalColumnasResultados
 );
-console.log(titleRegatas);
-
+// de las columnas de la tabla, me quedo solo con las que tienen resultados
 const encabezadosRegatas = [...cols].slice(
   primeraColumna,
   primeraColumna + totalColumnasResultados
 );
-console.log(encabezadosRegatas);
+// agrega la clase 'esconder' a una cantidad de columnas igual a la cantidad de flotas menos 1 (esto se hace para cada regata)
 let v = 0;
 encabezadosRegatas.forEach((nodo, key) => {
   if (key % flotas === 0 && key < primeraColumna + totalColumnasResultados) {
@@ -81,6 +78,7 @@ encabezadosRegatas.forEach((nodo, key) => {
   }
   v++;
 });
+// lo mismo que antes pero para las celdas con encabezados
 let w = 0;
 titleRegatas.forEach((nodo, key) => {
   if (key % flotas === 0 && key < primeraColumna + totalColumnasResultados) {
@@ -91,5 +89,6 @@ titleRegatas.forEach((nodo, key) => {
   }
   w++;
 });
+// se pone display none a todas las celdas y columnas con clase 'esconder'
 const escondidos = document.querySelectorAll(".esconder");
 escondidos.forEach((elemento) => (elemento.style.display = "none"));
