@@ -2,7 +2,12 @@ function manipulateDOM() {
   // colores para 7 flotas
   const colores = ["gold", "blue", "red", "white", "green", "brown", "violet"];
   // el simbolo del color puede ser circulo o diamante. Para que sea circulo, escribir 'circulo'; para que sea diamante se puede escribir cualquier otra cosa.
-  const simbolo = "circulo";
+  const style = document.querySelector("head > style");
+
+  const newInnerHTML =
+    ".flotas {width:5px; height:5px; border-radius: 50%; border:1px solid grey;} .nested-div {display:flex;justify-content:space-between; gap:5px; width:100%;}";
+  style.innerHTML += newInnerHTML;
+
   // todas las filas de resultados
   const rows = document.querySelectorAll("tr.summaryrow");
   // agrega un id a cada <tr>
@@ -52,11 +57,15 @@ function manipulateDOM() {
       if (celdas[j][i].innerHTML == "&nbsp;") {
         celdas[j][i].classList.add("esconder");
       } else {
-        const newDiv = document.createElement("span");
-        newDiv.style.color = colores[v];
-        newDiv.style.fontSize = "15px";
-        newDiv.innerHTML =
-          simbolo === "circulo" ? "&nbsp; &#9679;" : "&nbsp; &#9830;";
+        const prevHTML = celdas[j][i].innerHTML;
+        const newDiv = document.createElement("div");
+        newDiv.classList.add("nested-div");
+        newDiv.innerHTML = prevHTML;
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("flotas");
+        newSpan.style.backgroundColor = colores[v];
+        newDiv.appendChild(newSpan);
+        celdas[j][i].innerHTML = "";
         celdas[j][i].appendChild(newDiv);
       }
       v++;
