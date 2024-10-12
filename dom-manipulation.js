@@ -1,4 +1,15 @@
 const colores = ["yellow", "blue", "red", "white", "green", "brown", "violet"];
+const style = document.querySelector("style"); // Create a style tag
+style.innerHTML += `
+.flotas {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:inline-block;
+  margin-left: 5px;
+}
+`;
+document.head.appendChild(style); // Append style tag to the head
 const rows = document.querySelectorAll("tr.summaryrow");
 console.log("cantidad de filas: ", rows.length);
 rows.forEach((value, key) => (value.id = `puesto-${key + 1}`));
@@ -52,7 +63,11 @@ for (let j = 0; j < rows.length; j++) {
       /* celdas[j][i].parentNode.removeChild(celdas[j][i]); */
       celdas[j][i].classList.add("esconder");
     } else {
-      celdas[j][i].style.backgroundColor = colores[v];
+      const newDiv = document.createElement("div");
+      newDiv.classList.add("flotas");
+      newDiv.style.backgroundColor = colores[v];
+      celdas[j][i].appendChild(newDiv);
+      /* celdas[j][i].style.backgroundColor = colores[v]; */
     }
     v++;
   }
